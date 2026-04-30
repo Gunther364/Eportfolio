@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}SAE 2.02 - Mesurer et caractériser un signal ou un système{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🚁 SAE 2.02 : Détecteur acoustique de drone</h1>
+
+    <div class="alert alert-info">
+        <strong>Objectif :</strong> Concevoir un dispositif électronique sous Arduino capable de détecter la présence probable d'un drone en analysant le bruit acoustique de ses pales.
+    </div>
+
+    <h3>📚 Étapes du projet</h3>
+    <ol>
+        <li><strong>Analyse physique :</strong> Déterminer la fréquence de passage des pales (\(f_{BPF}\)) en fonction du régime de rotation (RPM) et du nombre de pales.</li>
+        <li><strong>Chaîne de traitement :</strong> Concevoir un système basé sur :
+            <ul>
+                <li>L'acquisition via un capteur acoustique (microphone) avec centrage du signal.</li>
+                <li>Le filtrage numérique (filtre biquad passe-bande) centré sur \(f_0\).</li>
+                <li>Le calcul de l'énergie RMS sur des fenêtres temporelles (\(N=200\) échantillons).</li>
+                <li>Une règle de décision robuste : validation uniquement si 3 fenêtres consécutives dépassent un seuil.</li>
+            </ul>
+        </li>
+        <li><strong>Implémentation Arduino :</strong> Coder le traitement numérique en temps réel, configurer les coefficients du filtre et gérer la signalisation par LED.</li>
+        <li><strong>Expérimentation :</strong> Mesurer le bruit de fond, régler le seuil de détection et valider le système avec une source sonore contrôlée.</li>
+    </ol>
+
+    <h3 class="mt-4">🧠 Compétences évaluées</h3>
+    <ul>
+        <li><strong>Acquisition et traitement :</strong> Convertir et traiter des signaux analogiques (CAN) pour en extraire une information utile.</li>
+        <li><strong>Systèmes embarqués :</strong> Programmer une carte Arduino pour des calculs de filtrage en temps réel.</li>
+        <li><strong>Physique des signaux :</strong> Appliquer les principes de la rotation mécanique aux signatures acoustiques et au filtrage.</li>
+    </ul>
+
+    <h3 class="mt-4">🎯 Conseils pour réussir</h3>
+    <ul>
+        <li>Soignez le centrage du signal à 512 (moyenne de l'ADC 10 bits) avant tout filtrage.</li>
+        <li>Testez votre filtre numérique en Python avant de l'implémenter sur Arduino.</li>
+        <li>Ajustez le seuil de détection expérimentalement en fonction de l'environnement ambiant.</li>
+        <li>Documentez rigoureusement vos mesures d'énergie (\(E_m\)) et justifiez vos choix de paramètres.</li>
+    </ul>
+
+    <div class="text-center mt-5">
+        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour au Portfolio</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}SAE 1.01 - Hygiène informatique et cybersécurité{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🛡️ SAE 1.01 : Hygiène informatique et cybersécurité</h1>
+
+    <div class="alert alert-info">
+        <strong>Durée :</strong> 12 heures<br>
+        <strong>Objectif :</strong> Identifier les différents types de vulnérabilités dans un système informatique et comprendre leurs conséquences.
+    </div>
+
+    <h3>📚 Étapes du projet</h3>
+    <ol>
+        <li>Créer un compte sur le site du MOOC de l’ANSSI : <a href="https://secnumacademie.gouv.fr/auth/login" target="_blank">SecNumAcadémie</a></li>
+        <li>Suivre les 4 modules de formation en autonomie pendant les heures de projet</li>
+        <li>Construire un <strong>diaporama</strong> listant les vulnérabilités des réseaux et télécoms, avec :
+            <ul>
+                <li>Une explication simple de chaque vulnérabilité</li>
+                <li>Un exemple concret d’attaque</li>
+                <li>Les conséquences en termes de disponibilité, intégrité, confidentialité</li>
+            </ul>
+        </li>
+        <li>À la fin du MOOC, télécharger une <strong>capture d’écran de votre réussite</strong> (à intégrer dans le portfolio)</li>
+        <li>Conserver le diaporama pour la <strong>soutenance orale</strong> (10 minutes)</li>
+    </ol>
+
+    <h3 class="mt-4">🧠 Compétences évaluées</h3>
+    <ul>
+        <li><strong>AC0112 :</strong> Comprendre l’architecture des systèmes numériques et les principes du codage de l’information</li>
+        <li><strong>AC0114 :</strong> Maîtriser les rôles et principes des systèmes d’exploitation pour configurer et administrer les réseaux</li>
+        <li><strong>AC0115 :</strong> Identifier les dysfonctionnements du réseau local</li>
+    </ul>
+
+    <h3 class="mt-4">🎯 Conseils pour réussir</h3>
+    <ul>
+        <li>Notez les points clés de chaque module pendant le MOOC</li>
+        <li>Utilisez des exemples concrets pour illustrer les vulnérabilités</li>
+        <li>Soignez la présentation du diaporama : clarté, visuels, structure</li>
+        <li>Préparez-vous à expliquer les conséquences des attaques en termes simples</li>
+    </ul>
+
+    <div class="text-center mt-5">
+        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour au Portfolio</a>
+    </div>
+</div>
+{% endblock %}

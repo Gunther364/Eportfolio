@@ -58,5 +58,40 @@ final class BlogController extends AbstractController
         ]);
     }
 
+    #[Route('/blog/sae2-01', name: 'app_sae201')]
+    public function sae201(): Response
+    {
+        return $this->render('blog/sae2.01.html.twig', [
+        ]);
+    }
+
+        #[Route('/blog/sae2-02', name: 'app_sae202')]
+    public function sae202(): Response
+    {
+        return $this->render('blog/sae2.02.html.twig', [
+        ]);
+    }
+
+        #[Route('/blog/sae2-03', name: 'app_sae203')]
+    public function sae203(): Response
+    {
+        return $this->render('blog/sae2.03.html.twig', [
+        ]);
+    }
+
+        #[Route('/blog/sae2-04', name: 'app_sae204')]
+    public function sae204(): Response
+    {
+        return $this->render('blog/sae2.04.html.twig', [
+        ]);
+    }
+
+        #[Route('/blog/sae2-05', name: 'app_sae205')]
+    public function sae205(): Response
+    {
+        return $this->render('blog/sae2.05.html.twig', [
+        ]);
+    }
+
 
 }

@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block title %}SAÉ 2.03 - Mise en place d'une solution informatique{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🚀 SAÉ 2.03 : Solution Informatique (Auto-entrepreneur)</h1>
+
+    <div class="alert alert-info">
+        <strong>Durée totale :</strong> ~30 heures (Projet individuel)<br>
+        <strong>Objectif :</strong> Mettre en place un environnement serveur complet et portable (Docker) incluant un site vitrine et une application métier.
+    </div>
+
+    <h3>📚 Étapes du projet</h3>
+    <ol>
+        <li>
+            <strong>Partie 1 : Architecture Docker (8h)</strong>
+            <ul>
+                <li>Installation de Docker Desktop et configuration des réseaux isolés.</li>
+                <li>Création d'un fichier <code>docker-compose.yml</code> pour l'orchestration des services.</li>
+                <li>Mise en place de volumes persistants pour sécuriser les données MariaDB.</li>
+                <li>Déploiement d'Adminer pour la gestion simplifiée de la base de données.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Partie 2 : Site Vitrine WordPress (8h)</strong>
+            <ul>
+                <li>Installation du CMS WordPress via une image Docker officielle.</li>
+                <li>Liaison du serveur Web avec la base de données MariaDB.</li>
+                <li>Configuration du site pour les besoins spécifiques d'un auto-entrepreneur.</li>
+                <li>Optimisation des performances et gestion des extensions.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Partie 3 : Application Métier & PHP (10h)</strong>
+            <ul>
+                <li>Développement d'un module d'évaluation de coûts en PHP.</li>
+                <li>Création de formulaires interactifs pour la sélection de prestations.</li>
+                <li>Enregistrement et récupération des données de commandes en SQL.</li>
+                <li>Sécurisation des échanges via l'utilisation de requêtes préparées.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Partie 4 : Automatisation PowerShell (4h)</strong>
+            <ul>
+                <li>Rédaction de scripts PowerShell pour le lancement automatisé de l'infrastructure.</li>
+                <li>Automatisation des processus de sauvegarde (Dump SQL) et de restauration.</li>
+                <li>Gestion des conteneurs via des lignes de commande optimisées.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h3 class="mt-4">🧠 Compétences évaluées</h3>
+    <ul>
+        <li><strong>AC0311 :</strong> Utiliser un système informatique et ses outils (Docker, PowerShell).</li>
+        <li><strong>AC0312 :</strong> Lire, exécuter, corriger et modifier un programme (PHP/SQL).</li>
+        <li><strong>AC0314 :</strong> Connaître l'architecture et les technologies d'un site Web (Apache, MariaDB).</li>
+        <li><strong>AC0315 :</strong> Choisir les mécanismes de gestion de données adaptés (Volumes Docker).</li>
+    </ul>
+
+    <h3 class="mt-4">🎯 Livrables et Soutenance</h3>
+    <ul>
+        <li>Archive ZIP contenant les Dockerfiles et scripts de déploiement.</li>
+        <li><strong>Démonstration technique :</strong> Présentation du fonctionnement de la solution complète.</li>
+        <li>Compte-rendu détaillé sur la mise en œuvre et les choix techniques.</li>
+    </ul>
+
+    <div class="text-center mt-5">
+        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour au Portfolio</a>
+    </div>
+</div>
+{% endblock %}

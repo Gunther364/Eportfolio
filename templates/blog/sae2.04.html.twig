@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title %}SAÉ 2.04 - Projet Intégratif : Atelier d'Artistes{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🎨 SAÉ 2.04 : Projet Intégratif (Atelier d'Artistes)</h1>
+
+    <div class="alert alert-info">
+        <strong>Durée totale :</strong> ~45 heures (Projet individuel)<br>
+        <strong>Objectif :</strong> Mettre en place l'infrastructure informatique complète d'un atelier d'artistes (Serveur Web, Stockage, Réseau, Téléphonie).
+    </div>
+
+    <h3>📚 Étapes du projet</h3>
+    <ol>
+        <li>
+            <strong>Partie 1 : Serveur Web Symfony (12h)</strong>
+            <ul>
+                <li>Installation d'un serveur Linux Debian 11 sur baie de virtualisation.</li>
+                <li>Déploiement d'un site web <strong>Symfony</strong> (utilisant Apache, Composer et PHP).</li>
+                <li>Adaptation du code pour afficher des œuvres d'art générées via des scripts Python.</li>
+                <li>Sécurisation de l'accès par authentification <code>.htaccess</code>.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Partie 2 : Art Algorithmique & Python (11h)</strong>
+            <ul>
+                <li>Analyse d'une œuvre mathématique (ex: Georg Nees, François Morellet).</li>
+                <li>Développement en <strong>Python (PyGame/Matplotlib)</strong> pour générer sa propre œuvre.</li>
+                <li>Intégration de l'œuvre interactive sur le serveur Linux.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Partie 3 : Stockage et Services Réseau (8h)</strong>
+            <ul>
+                <li>Mise en place d'un serveur de fichiers <strong>Samba4</strong> (Infrastructure Active Directory).</li>
+                <li>Gestion des droits d'accès pour séparer les documents des artistes et des comptables.</li>
+                <li>Configuration d'un service <strong>DNS</strong> et potentiellement d'un annuaire <strong>LDAP</strong>.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Partie 4 : Téléphonie sur IP (8h)</strong>
+            <ul>
+                <li>Installation d'un IPBX (ex: <strong>FreePBX</strong>) pour l'atelier.</li>
+                <li>Configuration d'un <strong>Serveur Vocal Interactif (IVR)</strong> avec gestion des horaires (7j/7, 8h-18h).</li>
+                <li>Attribution de SDA et gestion des répondeurs pour les 4 artistes (Léon Ardavinci, etc.).</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h3 class="mt-4">🧠 Compétences évaluées</h3>
+    <ul>
+        <li><strong>AC0113 :</strong> Configurer les fonctions de base du réseau local (Configuration IP serveur).</li>
+        <li><strong>AC0114 :</strong> Maîtriser les systèmes d’exploitation pour la configuration de services (Apache, Samba, IPBX).</li>
+        <li><strong>AC0312 :</strong> Lire, exécuter, corriger et modifier un programme (Adaptation projet Symfony/Python).</li>
+        <li><strong>AC0314 :</strong> Connaître l'architecture et les technologies d'un site Web.</li>
+    </ul>
+
+    <h3 class="mt-4">🎯 Livrables et Soutenance</h3>
+    <ul>
+        <li>Comptes rendus détaillés de chaque partie sur Moodle.</li>
+        <li><strong>Soutenance orale :</strong> 10 minutes de présentation + 3 minutes de questions.</li>
+        <li>Support PowerPoint : maximum 5 diapositives (dont une en anglais).</li>
+    </ul>
+
+    <div class="text-center mt-5">
+        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour au Portfolio</a>
+    </div>
+</div>
+{% endblock %}

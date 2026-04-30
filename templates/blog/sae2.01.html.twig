@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}SAE 2.1 - Construire un réseau informatique pour une petite structure{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🖧 SAE 2.1 : Construire un réseau informatique pour une petite structure</h1>
+
+    <div class="alert alert-info">
+        <strong>Durée :</strong> 12 heures<br>
+        <strong>Objectif :</strong> Concevoir, configurer et sécuriser une infrastructure réseau multi-sites avec VLAN, routage, NAT et ACL.
+    </div>
+
+    <h3>📚 Étapes du projet</h3>
+    <ol>
+        <li>Étudier le cahier des charges et la topologie fournie pour comprendre les contraintes du réseau multi-sites.</li>
+        <li>Construire un plan d’adressage IP en utilisant le VLSM à partir de la plage <strong>172.16.0.0/16</strong>.</li>
+        <li>Choisir et justifier le matériel réseau nécessaire pour les différents LAN et sites.</li>
+        <li>Réaliser une maquette sous <strong>Packet Tracer</strong> pour tester la connectivité, le routage, le NAT et les ACL.</li>
+        <li>Configurer les <strong>VLAN</strong> (admin, services, formationA, formationB, enseignants) ainsi que les liens trunk.</li>
+        <li>Mettre en place le <strong>routage inter-VLAN</strong> et le <strong>routage inter-sites</strong> avec RIP.</li>
+        <li>Configurer le <strong>NAT</strong> pour permettre la sortie vers le WAN avec l’adresse publique fournie.</li>
+        <li>Mettre en place les <strong>ACL</strong> pour contrôler les accès entre VLAN, vers Internet et vers les serveurs internes.</li>
+        <li>Fournir un compte-rendu complet avec tableaux, tests, captures d’écran ou vidéo, puis préparer la soutenance orale.</li>
+    </ol>
+
+    <h3 class="mt-4">🧠 Compétences évaluées</h3>
+    <ul>
+        <li><strong>AC0112 :</strong> Comprendre l’architecture des systèmes numériques et le cahier des charges réseau.</li>
+        <li><strong>AC0113 :</strong> Configurer les fonctions de base du réseau local, les VLAN et le routage inter-VLAN.</li>
+        <li><strong>AC0114 :</strong> Maîtriser les rôles et principes des systèmes d’exploitation pour administrer les équipements réseau.</li>
+        <li><strong>AC0115 :</strong> Identifier et corriger les dysfonctionnements du réseau local.</li>
+        <li><strong>AC0116 :</strong> Installer correctement un poste client avec adresse IP, masque, passerelle et DNS.</li>
+    </ul>
+
+    <h3 class="mt-4">🎯 Conseils pour réussir</h3>
+    <ul>
+        <li>Justifiez chaque choix technique avec le cahier des charges.</li>
+        <li>Vérifiez qu’il n’y a pas de chevauchement d’adresses dans le plan VLSM.</li>
+        <li>Testez chaque fonctionnalité : VLAN, routage, NAT, ACL, accès aux serveurs et connectivité WAN.</li>
+        <li>Conservez toutes les preuves : captures d’écran, tableaux de configuration, résultats de tests.</li>
+        <li>Préparez une présentation orale courte et claire en expliquant votre démarche et vos validations.</li>
+    </ul>
+
+    <div class="text-center mt-5">
+        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour au Portfolio</a>
+    </div>
+</div>
+{% endblock %}
