@@ -92,6 +92,13 @@ final class BlogController extends AbstractController
         return $this->render('blog/sae2.05.html.twig', [
         ]);
     }
+        #[Route("/", name="root")]
+    public function root(): Response
+    {
+        return $this->redirectToRoute("app_home"); 
+        
+}
+
 
 
 }
