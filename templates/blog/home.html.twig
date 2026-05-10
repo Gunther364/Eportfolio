@@ -31,7 +31,6 @@
     margin: 5px;
   }
 
-  /* Espacement entre les sections */
   .section-spacing {
     margin-top: 100px;
     margin-bottom: 100px;
@@ -54,7 +53,6 @@
     }
   }
 
-  /* Style du titre des sections */
   .section-title {
     font-size: 2rem;
     font-weight: bold;
@@ -64,7 +62,6 @@
     position: relative;
   }
 
-  /* Traits décoratifs autour du titre */
   .section-title::before,
   .section-title::after {
     content: "";
@@ -76,7 +73,6 @@
     vertical-align: middle;
   }
 
-  /* Effet hover sur les cartes */
   .card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -91,9 +87,25 @@
     object-fit: cover;
   }
 
-  /* Hauteur mini pour harmoniser les cartes loisirs / projets */
   .card-body-min {
     min-height: 160px;
+  }
+
+  .badge {
+    padding: 0.65em 1em;
+    font-size: 0.95rem;
+  }
+
+  #competences .list-group-item {
+    gap: 12px;
+  }
+
+  #competences .list-group-item span {
+    flex: 1 1 300px;
+  }
+
+  #competences .btn-group {
+    flex-shrink: 0;
   }
 </style>
 
@@ -107,35 +119,42 @@
       <p class="mb-3">
         Actuellement en 1<sup>re</sup> année, je recherche un stage / une alternance pour mettre en pratique mes compétences techniques et humaines.
       </p>
+
       <div class="social-buttons mt-3">
-        <a href="https://github.com/GauthierPlayMeraud" class="btn btn-outline-dark" target="_blank" aria-label="Profil GitHub">
+        <a href="https://github.com/GauthierPlayMeraud" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub">
           <img src="{{ asset('images/github.png') }}" alt="Logo GitHub" style="height:20px; margin-right:5px;">
           GitHub
         </a>
-        <a href="https://linkedin.com/in/tonprofil" class="btn btn-outline-primary" target="_blank" aria-label="Profil LinkedIn">
+
+        <a href="https://linkedin.com/in/tonprofil" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn">
           <img src="{{ asset('images/LNKD.png') }}" alt="Logo LinkedIn" style="height:20px; margin-right:5px;">
           LinkedIn
         </a>
-        <a href="https://twitter.com/tonprofil" class="btn btn-outline-info" target="_blank" aria-label="Profil X">
+
+        <a href="https://twitter.com/tonprofil" class="btn btn-outline-info" target="_blank" rel="noopener noreferrer" aria-label="Profil X">
           <img src="{{ asset('images/X2.png') }}" alt="Logo X" style="height:20px; margin-right:5px;">
           X
+        </a>
+
         <a href="{{ asset('images/cv.pdf') }}"
-          class="btn btn-outline-warning"
-          target="_blank"
-          aria-label="Télécharger mon CV">
+           class="btn btn-outline-warning"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Télécharger mon CV">
           <img src="{{ asset('images/CV.png') }}" alt="Icône CV" style="height:20px; margin-right:5px;">
           CV
         </a>
+
         <a href="#contacts" class="btn btn-primary">
           Me contacter
         </a>
       </div>
     </div>
+
     <img src="{{ asset('images/cv-photo.png') }}" alt="Photo de profil de Gauthier" class="profile-pic">
   </div>
 </div>
 
-<!-- Section À propos -->
 <section class="py-5 section-spacing" id="apropos">
   <div class="container">
     <h2 class="section-title text-center">👤 À propos de moi</h2>
@@ -158,164 +177,226 @@
   </div>
 </section>
 
-<!-- Section Compétences -->
 <section class="py-5 section-spacing" id="competences">
-  <div class="container text-center">
-    <h2 class="section-title">⚙️ Mes compétences</h2>
-    <p class="mb-4">
-      Compétences issues du BUT Réseaux &amp; Télécoms et technologies que j’utilise le plus souvent.
-    </p>
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2 class="section-title">⚙️ Mes compétences</h2>
+      <p class="mb-0">
+        Compétences issues du BUT Réseaux &amp; Télécoms et technologies que j’utilise le plus souvent.
+      </p>
+    </div>
 
-   <!-- Bloc AC (programme officiel) -->
-<div class="row mb-5">
-  <!-- Connecter -->
-  <div class="col-md-4 text-start">
-    <h4 class="mb-3">🔌 Connecter</h4>
-    <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span>
-        AC12.05 Communiquer avec un tiers (client, collaborateur...) et adapter son discours et sa langue à son interlocuteur
-      </span>
-      <div class="btn-group btn-group-sm" role="group">
-        <a href="https://docs.google.com/document/d/133EkEJPjBfuCyYd187wi6oA-Ao5q3XpWqdML227X-ag/edit?usp=drive_link"
-           target="_blank"
-           class="btn btn-outline-primary">
-          Preuve
-        </a>
-        <a href="https://docs.google.com/document/d/107xXkJoqq0NDpImRjDqgiCNmbeaTXDFDFlM5nhnIjAs/edit?usp=drive_link"
-           target="_blank"
-           class="btn btn-outline-secondary">
-          Analyse réflexive
-        </a>
+    <div class="accordion" id="accordionCompetences">
+
+      <div class="accordion-item mb-3">
+        <h2 class="accordion-header" id="headingConnecter">
+          <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseConnecter"
+                  aria-expanded="false"
+                  aria-controls="collapseConnecter">
+            🔌 Connecter
+          </button>
+        </h2>
+        <div id="collapseConnecter"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingConnecter"
+             data-bs-parent="#accordionCompetences">
+          <div class="accordion-body">
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>
+                  AC12.05 Communiquer avec un tiers (client, collaborateur...) et adapter son discours et sa langue à son interlocuteur
+                </span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/133EkEJPjBfuCyYd187wi6oA-Ao5q3XpWqdML227X-ag/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-primary">
+                    Preuve
+                  </a>
+                  <a href="https://docs.google.com/document/d/107xXkJoqq0NDpImRjDqgiCNmbeaTXDFDFlM5nhnIjAs/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-secondary">
+                    Analyse réflexive
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </li>
-    </ul>
-  </div>
 
-  <!-- Programmer : seulement AC13.03 dans ton tableau -->
-  <div class="col-md-4 text-start">
-    <h4 class="mb-3">💻 Programmer</h4>
-    <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>AC13.03 Traduire un algorithme dans un langage donné</span>
-        <div class="btn-group btn-group-sm" role="group">
-          <a href="https://docs.google.com/document/d/1FeN2BElD6l-e9hMbTnyACJVhwDgJ68lHqt41gvvC-Rw/edit?usp=drive_link"
-             target="_blank"
-             class="btn btn-outline-primary">
-            Preuve
-          </a>
-          <a href="https://docs.google.com/document/d/1lFY447uG6UuD09RBO5-ORwZC6omVMhWRTjV8bLsszcU/edit?usp=drive_link"
-             target="_blank"
-             class="btn btn-outline-secondary">
-            Analyse réflexive
-          </a>
+      <div class="accordion-item mb-3">
+        <h2 class="accordion-header" id="headingProgrammer">
+          <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseProgrammer"
+                  aria-expanded="false"
+                  aria-controls="collapseProgrammer">
+            💻 Programmer
+          </button>
+        </h2>
+        <div id="collapseProgrammer"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingProgrammer"
+             data-bs-parent="#accordionCompetences">
+          <div class="accordion-body">
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC13.03 Traduire un algorithme dans un langage donné</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/1FeN2BElD6l-e9hMbTnyACJVhwDgJ68lHqt41gvvC-Rw/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-primary">
+                    Preuve
+                  </a>
+                  <a href="https://docs.google.com/document/d/1lFY447uG6UuD09RBO5-ORwZC6omVMhWRTjV8bLsszcU/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-secondary">
+                    Analyse réflexive
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-      </li>
-    </ul>
-  </div>
+      </div>
 
-  <!-- Administrer -->
-  <div class="col-md-4 text-start">
-    <h4 class="mb-3">🛠 Administrer</h4>
-    <ul class="list-group">
+      <div class="accordion-item mb-3">
+        <h2 class="accordion-header" id="headingAdministrer">
+          <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseAdministrer"
+                  aria-expanded="false"
+                  aria-controls="collapseAdministrer">
+            🛠 Administrer
+          </button>
+        </h2>
+        <div id="collapseAdministrer"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingAdministrer"
+             data-bs-parent="#accordionCompetences">
+          <div class="accordion-body">
+            <ul class="list-group">
 
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>AC11.02 Architecture des systèmes numériques et de l’Internet</span>
-        <div class="btn-group btn-group-sm" role="group">
-          <a href="https://docs.google.com/document/d/1wXjI6q3cqHQDmgPGv2GJjdozFONqxG90UjL53sCYKLs/edit?usp=drive_link" target="_blank" class="btn btn-outline-primary">Preuve</a>
-          <a href="https://docs.google.com/document/d/14Mp2-5FA2Uf6xeZ98GNz1zKyj9rIHPHg8UrdqSrDbF4/edit?usp=drive_link" target="_blank" class="btn btn-outline-secondary">Analyse réflexive</a>
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC11.02 Architecture des systèmes numériques et de l’Internet</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/1wXjI6q3cqHQDmgPGv2GJjdozFONqxG90UjL53sCYKLs/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-primary">Preuve</a>
+                  <a href="https://docs.google.com/document/d/14Mp2-5FA2Uf6xeZ98GNz1zKyj9rIHPHg8UrdqSrDbF4/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC11.03 Configuration d’un réseau local</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/16NoduA2GVES91RqPsuvvB868T71cPSfxgG4YcjvVx9Y/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-primary">Preuve</a>
+                  <a href="https://docs.google.com/document/d/1WEXR_mAQT8pZSGank4BDnNEvglO6tehNMEE74gkFY8w/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC11.04 Rôles des systèmes d’exploitation</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/1fFx4cjpAH4_AlGtLXbMG4oNVDkdaNlBKpjpyyBRE9AQ/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-primary">Preuve</a>
+                  <a href="https://docs.google.com/document/d/14pFbQSKMRnzyU7vw_BFyKxjiUD61lagOAx5Y3JDyIug/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC11.05 Diagnostic des dysfonctionnements réseau</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/1JRkBRJuX4UT11hKlmLN3UutXY7gyW4e2ev8hvAej1tg/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-primary">Preuve</a>
+                  <a href="https://docs.google.com/document/d/1qScX605tSkNkh7Strf_A9P3ZR_rUVDkCvN4UL10tBic/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC11.06 Installation et documentation d’un poste client</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/1EpR9-y0W5LzSEfeC4HgME-oklA--bElr/edit?usp=drive_link&ouid=104932122257706886425&rtpof=true&sd=true"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-primary">Preuve</a>
+                  <a href="https://docs.google.com/document/d/1T0AFmloBMjPigKerGOyHhE0QK446I7TW/edit?usp=drive_link&ouid=104932122257706886425&rtpof=true&sd=true"
+                     target="_blank" rel="noopener noreferrer"
+                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+            </ul>
+          </div>
         </div>
-      </li>
+      </div>
 
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>AC11.03 Configuration d’un réseau local</span>
-        <div class="btn-group btn-group-sm" role="group">
-          <a href="https://docs.google.com/document/d/16NoduA2GVES91RqPsuvvB868T71cPSfxgG4YcjvVx9Y/edit?usp=drive_link" target="_blank" class="btn btn-outline-primary">Preuve</a>
-          <a href="https://docs.google.com/document/d/1WEXR_mAQT8pZSGank4BDnNEvglO6tehNMEE74gkFY8w/edit?usp=drive_link" target="_blank" class="btn btn-outline-secondary">Analyse réflexive</a>
-        </div>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>AC11.04 Rôles des systèmes d’exploitation</span>
-        <div class="btn-group btn-group-sm" role="group">
-          <a href="https://docs.google.com/document/d/1fFx4cjpAH4_AlGtLXbMG4oNVDkdaNlBKpjpyyBRE9AQ/edit?usp=drive_link" target="_blank" class="btn btn-outline-primary">Preuve</a>
-          <a href="https://docs.google.com/document/d/14pFbQSKMRnzyU7vw_BFyKxjiUD61lagOAx5Y3JDyIug/edit?usp=drive_link" target="_blank" class="btn btn-outline-secondary">Analyse réflexive</a>
-        </div>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>AC11.05 Diagnostic des dysfonctionnements réseau</span>
-        <div class="btn-group btn-group-sm" role="group">
-          <a href="https://docs.google.com/document/d/1JRkBRJuX4UT11hKlmLN3UutXY7gyW4e2ev8hvAej1tg/edit?usp=drive_link" target="_blank" class="btn btn-outline-primary">Preuve</a>
-          <a href="https://docs.google.com/document/d/1qScX605tSkNkh7Strf_A9P3ZR_rUVDkCvN4UL10tBic/edit?usp=drive_link" target="_blank" class="btn btn-outline-secondary">Analyse réflexive</a>
-        </div>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>AC11.06 Installation et documentation d’un poste client</span>
-        <div class="btn-group btn-group-sm" role="group">
-          <a href="https://docs.google.com/document/d/1EpR9-y0W5LzSEfeC4HgME-oklA--bElr/edit?usp=drive_link&ouid=104932122257706886425&rtpof=true&sd=true" target="_blank" class="btn btn-outline-primary">Preuve</a>
-          <a href="https://docs.google.com/document/d/1T0AFmloBMjPigKerGOyHhE0QK446I7TW/edit?usp=drive_link&ouid=104932122257706886425&rtpof=true&sd=true" target="_blank" class="btn btn-outline-secondary">Analyse réflexive</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<!-- Bloc compétences techniques (badges) -->
-    <h3 class="mb-3">🧪 Compétences techniques</h3>
-    <p class="mb-4">
-      Technologies et outils manipulés dans les SAÉ (réseaux, développement et traitement de données).
-    </p>
-
-    <div class="mb-3">
-      <span class="badge text-bg-primary rounded-pill m-1">Linux</span>
-      <span class="badge text-bg-primary rounded-pill m-1">Windows / Windows Server</span>
-      <span class="badge text-bg-primary rounded-pill m-1">Cisco / Packet Tracer</span>
-      <span class="badge text-bg-primary rounded-pill m-1">Wireshark</span>
-      <span class="badge text-bg-primary rounded-pill m-1">tcpdump</span>
     </div>
-    <div class="mb-3">
-      <span class="badge text-bg-success rounded-pill m-1">Python</span>
-      <span class="badge text-bg-success rounded-pill m-1">Bash</span>
-      <span class="badge text-bg-success rounded-pill m-1">HTML / CSS</span>
-      <span class="badge text-bg-success rounded-pill m-1">Bootstrap</span>
-      <span class="badge text-bg-success rounded-pill m-1">Symfony</span>
-    </div>
-    <div class="mb-4">
-      <span class="badge text-bg-info rounded-pill m-1">Git / GitHub</span>
-      <span class="badge text-bg-info rounded-pill m-1">Virtualisation</span>
-      <span class="badge text-bg-info rounded-pill m-1">Markdown</span>
-      <span class="badge text-bg-info rounded-pill m-1">Excel / traitement de données</span>
-    </div>
 
-    <!-- Soft Skills intégrés juste en dessous -->
-    <div class="text-center">
-      <h3 class="mb-3">🌟 Mes Soft Skills</h3>
-      <div class="d-flex flex-wrap gap-2 justify-content-center">
-        <span class="btn btn-outline-primary btn-sm">💡 Esprit critique</span>
-        <span class="btn btn-outline-success btn-sm">🎨 Créativité</span>
-        <span class="btn btn-outline-info btn-sm">🤝 Travail en équipe</span>
-        <span class="btn btn-outline-warning btn-sm">🧘 Gestion du stress</span>
-        <span class="btn btn-outline-danger btn-sm">🗣 Communication</span>
+    <div class="text-center mt-5">
+      <h3 class="mb-3">🧪 Compétences techniques</h3>
+      <p class="mb-4">
+        Technologies et outils manipulés dans les SAÉ (réseaux, développement et traitement de données).
+      </p>
+
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+        <span class="badge text-bg-primary rounded-pill">Linux</span>
+        <span class="badge text-bg-primary rounded-pill">Windows / Windows Server</span>
+        <span class="badge text-bg-primary rounded-pill">Cisco / Packet Tracer</span>
+        <span class="badge text-bg-primary rounded-pill">Wireshark</span>
+        <span class="badge text-bg-primary rounded-pill">tcpdump</span>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+        <span class="badge text-bg-success rounded-pill">Python</span>
+        <span class="badge text-bg-success rounded-pill">Bash</span>
+        <span class="badge text-bg-success rounded-pill">HTML / CSS</span>
+        <span class="badge text-bg-success rounded-pill">Bootstrap</span>
+        <span class="badge text-bg-success rounded-pill">Symfony</span>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+        <span class="badge text-bg-info rounded-pill">Git / GitHub</span>
+        <span class="badge text-bg-info rounded-pill">Virtualisation</span>
+        <span class="badge text-bg-info rounded-pill">Markdown</span>
+        <span class="badge text-bg-info rounded-pill">Excel / traitement de données</span>
+      </div>
+
+      <div class="text-center mt-4">
+        <h3 class="mb-3">🌟 Mes Soft Skills</h3>
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+          <span class="btn btn-outline-primary btn-sm">💡 Esprit critique</span>
+          <span class="btn btn-outline-success btn-sm">🎨 Créativité</span>
+          <span class="btn btn-outline-info btn-sm">🤝 Travail en équipe</span>
+          <span class="btn btn-outline-warning btn-sm">🧘 Gestion du stress</span>
+          <span class="btn btn-outline-danger btn-sm">🗣 Communication</span>
+        </div>
       </div>
     </div>
 
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap"></script>
-
-
-<!-- Section Loisirs -->
 <section class="py-5 text-center section-spacing" id="loisirs">
   <div class="container">
     <h2 class="section-title">🎉 Loisirs</h2>
     <div class="row">
-      <!-- Sport -->
       <div class="col-md-3">
         <div class="card border-primary shadow-sm">
-          <a href="https://www.youtube.com/watch?v=-xUJmgXYHzc" target="_blank" aria-label="Vidéo musculation">
+          <a href="https://www.youtube.com/watch?v=-xUJmgXYHzc" target="_blank" rel="noopener noreferrer" aria-label="Vidéo musculation">
             <img src="{{ asset('images/jeffseid.jpg') }}" class="card-img-top" alt="Musculation en salle">
           </a>
           <div class="card-body card-body-min">
@@ -326,10 +407,10 @@
           </div>
         </div>
       </div>
-      <!-- Musique -->
+
       <div class="col-md-3">
         <div class="card border-success shadow-sm">
-          <a href="https://www.youtube.com/watch?v=FGBhQbmPwH8&list=RDFGBhQbmPwH8&start_radio=1" target="_blank" aria-label="Playlist musique">
+          <a href="https://www.youtube.com/watch?v=FGBhQbmPwH8&list=RDFGBhQbmPwH8&start_radio=1" target="_blank" rel="noopener noreferrer" aria-label="Playlist musique">
             <img src="{{ asset('images/dj.jpg') }}" class="card-img-top" alt="DJ et musique">
           </a>
           <div class="card-body card-body-min">
@@ -340,10 +421,10 @@
           </div>
         </div>
       </div>
-      <!-- Échecs -->
+
       <div class="col-md-3">
         <div class="card border-info shadow-sm">
-          <a href="https://www.chess.com" target="_blank" aria-label="Site Chess.com">
+          <a href="https://www.chess.com" target="_blank" rel="noopener noreferrer" aria-label="Site Chess.com">
             <img src="{{ asset('images/echec.jpg') }}" class="card-img-top" alt="Plateau d’échecs">
           </a>
           <div class="card-body card-body-min">
@@ -354,10 +435,10 @@
           </div>
         </div>
       </div>
-      <!-- Lecture -->
+
       <div class="col-md-3">
         <div class="card border-warning shadow-sm">
-          <a href="https://www.youtube.com/watch?v=UvOPy_iay0w" target="_blank" aria-label="Vidéo philosophie">
+          <a href="https://www.youtube.com/watch?v=UvOPy_iay0w" target="_blank" rel="noopener noreferrer" aria-label="Vidéo philosophie">
             <img src="{{ asset('images/socrate.jpg') }}" class="card-img-top" alt="Portrait de Socrate">
           </a>
           <div class="card-body card-body-min">
@@ -372,12 +453,10 @@
   </div>
 </section>
 
-<!-- Section Projets -->
 <section class="section-spacing" id="projets">
   <div class="container text-center">
     <h2 class="section-title">🛠️ Mes projets</h2>
 
-    <!-- Ligne 1 : SAE 1.01 à 1.04 -->
     <div class="row justify-content-center">
       <div class="col-md-3 mb-4">
         <div class="card border-primary shadow-sm">
@@ -386,8 +465,7 @@
             <p class="card-text">
               Hygiène informatique, bonnes pratiques de sécurité et sensibilisation aux risques.
             </p>
-            <a href="{{ path('app_sae101') }}" class="btn btn-primary" target="_blank"
-               aria-label="Voir le projet SAE 1.01">
+            <a href="{{ path('app_sae101') }}" class="btn btn-primary" target="_blank" aria-label="Voir le projet SAE 1.01">
               Voir le projet
             </a>
           </div>
@@ -401,8 +479,7 @@
             <p class="card-text">
               Configuration de réseaux locaux, services de base et dépannage.
             </p>
-            <a href="{{ path('app_sae102') }}" class="btn btn-success" target="_blank"
-               aria-label="Voir le projet SAE 1.02">
+            <a href="{{ path('app_sae102') }}" class="btn btn-success" target="_blank" aria-label="Voir le projet SAE 1.02">
               Voir le projet
             </a>
           </div>
@@ -416,8 +493,7 @@
             <p class="card-text">
               Étude de la couverture WiFi, câblage et communication avec le client.
             </p>
-            <a href="{{ path('app_sae103') }}" class="btn btn-info" target="_blank"
-               aria-label="Voir le projet SAE 1.03">
+            <a href="{{ path('app_sae103') }}" class="btn btn-info" target="_blank" aria-label="Voir le projet SAE 1.03">
               Voir le projet
             </a>
           </div>
@@ -431,8 +507,7 @@
             <p class="card-text">
               Création de ce portfolio : site Web de présentation en Symfony / Bootstrap.
             </p>
-            <a href="{{ path('app_sae104') }}" class="btn btn-dark" target="_blank"
-               aria-label="Voir le projet SAE 1.04">
+            <a href="{{ path('app_sae104') }}" class="btn btn-dark" target="_blank" aria-label="Voir le projet SAE 1.04">
               Voir le projet
             </a>
           </div>
@@ -440,7 +515,6 @@
       </div>
     </div>
 
-    <!-- Ligne 2 : SAE 1.05 centrée -->
     <div class="row justify-content-center">
       <div class="col-md-3">
         <div class="card border-info shadow-sm">
@@ -449,8 +523,7 @@
             <p class="card-text">
               Traitement de données réseau (tcpdump) avec Python, CSV et Excel.
             </p>
-            <a href="{{ path('app_sae105') }}" class="btn btn-info" target="_blank"
-               aria-label="Voir le projet SAE 1.05">
+            <a href="{{ path('app_sae105') }}" class="btn btn-info" target="_blank" aria-label="Voir le projet SAE 1.05">
               Voir le projet
             </a>
           </div>
@@ -458,112 +531,110 @@
       </div>
     </div>
 
-<!-- Ligne 3 : SAE 2.01 à 2.05 -->
-<div class="row justify-content-center mt-4">
-  <div class="col-md-3 mb-4">
-    <div class="card border-primary shadow-sm">
-      <div class="card-body card-body-min">
-        <h5 class="card-title">📘 SAE 2.01</h5>
-        <p class="card-text">
-          Approfondissement des bases réseaux et configuration avancée.
-        </p>
-        <a href="{{ path('app_sae201') }}" class="btn btn-primary" target="_blank">
-          Voir le projet
-        </a>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-3 mb-4">
+        <div class="card border-primary shadow-sm">
+          <div class="card-body card-body-min">
+            <h5 class="card-title">📘 SAE 2.01</h5>
+            <p class="card-text">
+              Approfondissement des bases réseaux et configuration avancée.
+            </p>
+            <a href="{{ path('app_sae201') }}" class="btn btn-primary" target="_blank">
+              Voir le projet
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="card border-success shadow-sm">
+          <div class="card-body card-body-min">
+            <h5 class="card-title">🧩 SAE 2.02</h5>
+            <p class="card-text">
+              Mise en place de services réseaux et virtualisation.
+            </p>
+            <a href="{{ path('app_sae202') }}" class="btn btn-success" target="_blank">
+              Voir le projet
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="card border-info shadow-sm">
+          <div class="card-body card-body-min">
+            <h5 class="card-title">🔧 SAE 2.03</h5>
+            <p class="card-text">
+              Sécurisation des infrastructures et gestion des accès.
+            </p>
+            <a href="{{ path('app_sae203') }}" class="btn btn-info" target="_blank">
+              Voir le projet
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="card border-dark shadow-sm">
+          <div class="card-body card-body-min">
+            <h5 class="card-title">🎓 SAE 2.04</h5>
+            <p class="card-text">
+              Déploiement d’applications et gestion de projet technique.
+            </p>
+            <a href="{{ path('app_sae204') }}" class="btn btn-dark" target="_blank">
+              Voir le projet
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-3 mb-4">
-    <div class="card border-success shadow-sm">
-      <div class="card-body card-body-min">
-        <h5 class="card-title">🧩 SAE 2.02</h5>
-        <p class="card-text">
-          Mise en place de services réseaux et virtualisation.
-        </p>
-        <a href="{{ path('app_sae202') }}" class="btn btn-success" target="_blank">
-          Voir le projet
-        </a>
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <div class="card border-warning shadow-sm">
+          <div class="card-body card-body-min">
+            <h5 class="card-title">📊 SAE 2.05</h5>
+            <p class="card-text">
+              Analyse de données, automatisation et reporting avancé.
+            </p>
+            <a href="{{ path('app_sae205') }}" class="btn btn-warning" target="_blank">
+              Voir le projet
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="col-md-3 mb-4">
-    <div class="card border-info shadow-sm">
-      <div class="card-body card-body-min">
-        <h5 class="card-title">🔧 SAE 2.03</h5>
-        <p class="card-text">
-          Sécurisation des infrastructures et gestion des accès.
-        </p>
-        <a href="{{ path('app_sae203') }}" class="btn btn-info" target="_blank">
-          Voir le projet
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3 mb-4">
-    <div class="card border-dark shadow-sm">
-      <div class="card-body card-body-min">
-        <h5 class="card-title">🎓 SAE 2.04</h5>
-        <p class="card-text">
-          Déploiement d’applications et gestion de projet technique.
-        </p>
-        <a href="{{ path('app_sae204') }}" class="btn btn-dark" target="_blank">
-          Voir le projet
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Ligne 4 : SAE 2.05 centrée -->
-<div class="row justify-content-center">
-  <div class="col-md-3">
-    <div class="card border-warning shadow-sm">
-      <div class="card-body card-body-min">
-        <h5 class="card-title">📊 SAE 2.05</h5>
-        <p class="card-text">
-          Analyse de données, automatisation et reporting avancé.
-        </p>
-        <a href="{{ path('app_sae205') }}" class="btn btn-warning" target="_blank">
-          Voir le projet
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
   </div>
 </section>
 
-<!-- Section Contact -->
 <section class="py-5 section-spacing" id="contacts">
   <div class="container">
     <h2 class="text-center mb-4 section-title">📞 Contact</h2>
     <div class="row justify-content-center">
-      <div class="col-md-4">
+      <div class="col-md-4 mb-4">
         <div class="card border-primary shadow-sm text-center">
           <div class="card-body">
             <h5 class="card-title">Téléphone</h5>
             <p class="card-text fs-5">📱 +33 7 49 49 57 48</p>
-            <a href="tel:+33612345678" class="btn btn-outline-primary btn-sm">Appeler</a>
+            <a href="tel:+33749495748" class="btn btn-outline-primary btn-sm">Appeler</a>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+
+      <div class="col-md-4 mb-4">
         <div class="card border-success shadow-sm text-center">
           <div class="card-body">
             <h5 class="card-title">Email</h5>
             <p class="card-text fs-5">✉️ gauthier.play.meraud@etu.univ-st-etienne.fr</p>
-            <a href="mailto:gauthier@example.com" class="btn btn-outline-success btn-sm">Envoyer un mail</a>
+            <a href="mailto:gauthier.play.meraud@etu.univ-st-etienne.fr" class="btn btn-outline-success btn-sm">Envoyer un mail</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% endblock %}
