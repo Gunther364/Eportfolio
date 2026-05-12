@@ -3,214 +3,544 @@
 {% block title %}SAE 1.05 - Traiter des données{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1 class="text-center mb-4">📊 SAE 1.05 : Traiter des données</h1>
 
-    <div class="alert alert-info">
-        <strong>Contexte :</strong> Analyse d’un fichier issu de la commande tcpdump pour identifier des activités suspectes entre le site d’administration en France et le site de production en Inde.<br>
-        <strong>Objectif :</strong> Concevoir des outils de traitement de données (Python, Excel) permettant d’extraire, d’analyser et de présenter les informations pertinentes pour le diagnostic réseau.
+<style>
+  .sae-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px 80px;
+  }
+
+  .sae-hero {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .sae-tag {
+    display: inline-block;
+    background: rgba(99,102,241,0.12);
+    border: 1px solid rgba(99,102,241,0.3);
+    color: #6366f1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+  }
+
+  .sae-hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .alert-info {
+    background: rgba(6,182,212,0.08) !important;
+    border: 1px solid rgba(6,182,212,0.25) !important;
+    border-left: 4px solid #06b6d4 !important;
+    border-radius: 12px !important;
+    color: var(--text-sec) !important;
+    padding: 20px 22px !important;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .alert-info strong { color: #06b6d4; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-pri);
+    margin: 44px 0 18px;
+    letter-spacing: -0.3px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-col);
+  }
+
+  /* ── LISTE DESCRIPTION ── */
+  ul.styled-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  ul.styled-list li {
+    background: var(--bg-card);
+    border: 1px solid var(--border-col);
+    border-radius: 10px;
+    padding: 13px 16px 13px 44px;
+    font-size: 0.89rem;
+    color: var(--text-sec);
+    line-height: 1.6;
+    position: relative;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  ul.styled-list li:hover {
+    border-color: var(--border-hover);
+    transform: translateX(4px);
+  }
+
+  ul.styled-list li::before {
+    content: '→';
+    position: absolute;
+    left: 16px;
+    color: #6366f1;
+    font-weight: 700;
+  }
+
+  ul.styled-list ul {
+    margin-top: 8px;
+    padding-left: 16px;
+    list-style: disc;
+    font-size: 0.84rem;
+  }
+
+  ul.styled-list ul li {
+    background: none;
+    border: none;
+    padding: 2px 0;
+    transform: none !important;
+  }
+
+  ul.styled-list ul li::before { display: none; }
+
+  /* ── ACCORDION ── */
+  .accordion-item {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-col) !important;
+    border-radius: 12px !important;
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+
+  .accordion-item:hover { border-color: var(--border-hover) !important; }
+
+  .accordion-button {
+    background: var(--bg-card) !important;
+    color: var(--text-pri) !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background: rgba(99,102,241,0.07) !important;
+    color: #6366f1 !important;
+  }
+
+  .accordion-button::after {
+    filter: invert(40%) sepia(100%) saturate(500%) hue-rotate(210deg);
+  }
+
+  .accordion-body {
+    background: var(--bg-card) !important;
+    padding: 14px 20px 18px !important;
+    border-top: 1px solid var(--border-col);
+  }
+
+  .accordion-body p {
+    font-size: 0.85rem;
+    color: var(--text-sec);
+  }
+
+  .accordion-body .btn-outline-primary,
+  .accordion-body .btn-outline-secondary {
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    transition: all 0.25s;
+  }
+
+  .accordion-body .btn-outline-primary:hover,
+  .accordion-body .btn-outline-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+
+  /* ── CRITÈRES D'ÉVALUATION ── */
+  .criteres-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .critere-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-col);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .critere-card:hover {
+    border-color: var(--border-hover);
+    transform: translateX(4px);
+  }
+
+  .critere-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .critere-header h6 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-pri);
+    margin: 0;
+  }
+
+  .critere-score {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 50px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .critere-body {
+    font-size: 0.84rem;
+    color: var(--text-sec);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid rgba(99,102,241,0.25);
+  }
+
+  .critere-body strong { color: var(--text-pri); }
+
+  /* ── MODALITÉS ── */
+  .modalites-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    counter-reset: modal-counter;
+  }
+
+  .modalites-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--bg-card);
+    border: 1px solid var(--border-col);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 0.88rem;
+    color: var(--text-sec);
+    line-height: 1.65;
+    transition: border-color 0.25s, transform 0.25s;
+    counter-increment: modal-counter;
+  }
+
+  .modalites-list li:hover {
+    border-color: var(--border-hover);
+    transform: translateX(4px);
+  }
+
+  .modalites-list li::before {
+    content: counter(modal-counter);
+    min-width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── BOUTON RETOUR ── */
+  .btn-retour {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border: none;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+  }
+
+  .btn-retour:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(99,102,241,0.45);
+    color: #fff !important;
+  }
+</style>
+
+<div class="sae-page">
+
+  <!-- HERO -->
+  <div class="sae-hero" data-aos="fade-up">
+    <div class="sae-tag">SAE 1.05</div>
+    <h1>📊 Traiter des données</h1>
+  </div>
+
+  <!-- ALERT -->
+  <div class="alert alert-info" data-aos="fade-up" data-aos-delay="80">
+    <strong>Contexte :</strong> Analyse d'un fichier issu de la commande tcpdump pour identifier des activités suspectes entre le site d'administration en France et le site de production en Inde.<br>
+    <strong>Objectif :</strong> Concevoir des outils de traitement de données (Python, Excel) permettant d'extraire, d'analyser et de présenter les informations pertinentes pour le diagnostic réseau.
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="section-label" data-aos="fade-up">📚 Description de la SAÉ</div>
+  <ul class="styled-list" data-aos="fade-up" data-aos-delay="60">
+    <li>Réalisation d'un premier TP Python (TP1) pour apprendre à lire un fichier textuel, extraire des données et produire un fichier csv.</li>
+    <li>Réalisation des activités du dossier Excel pour se familiariser avec le traitement de données et les représentations graphiques.</li>
+    <li>Mise en œuvre d'un traitement complet d'un fichier tcpdump afin d'identifier les deux activités suspectes sur le réseau.</li>
+  </ul>
+
+  <!-- APPRENTISSAGES CRITIQUES -->
+  <div class="section-label" data-aos="fade-up">🧠 Apprentissages critiques mobilisés</div>
+
+  <div class="accordion" id="accordionAC105" data-aos="fade-up" data-aos-delay="60">
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAC0311">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAC0311"
+                aria-expanded="false" aria-controls="collapseAC0311">
+          AC0311 — Utiliser un système informatique et ses outils
+        </button>
+      </h2>
+      <div id="collapseAC0311" class="accordion-collapse collapse"
+           aria-labelledby="headingAC0311" data-bs-parent="#accordionAC105">
+        <div class="accordion-body">
+          <p class="mb-2">Windows/Linux, Python/Spyder, éditeur de code, Excel, GitHub, GitHub Desktop.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
+          <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
+        </div>
+      </div>
     </div>
 
-    <h3>📚 Description de la SAÉ</h3>
-    <ul>
-        <li>Réalisation d’un premier TP Python (TP1) pour apprendre à lire un fichier textuel, extraire des données et produire un fichier csv.</li>
-        <li>Réalisation des activités du dossier Excel pour se familiariser avec le traitement de données et les représentations graphiques.</li>
-        <li>Mise en œuvre d’un traitement complet d’un fichier tcpdump afin d’identifier les deux activités suspectes sur le réseau.</li>
-    </ul>
-
-    <h3 class="mt-4">🧠 Apprentissages critiques mobilisés</h3>
-
-    <div class="accordion mt-3" id="accordionAC105">
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingAC0311">
-                <button class="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseAC0311"
-                        aria-expanded="false"
-                        aria-controls="collapseAC0311">
-                    AC0311 — Utiliser un système informatique et ses outils
-                </button>
-            </h2>
-            <div id="collapseAC0311" class="accordion-collapse collapse"
-                 aria-labelledby="headingAC0311" data-bs-parent="#accordionAC105">
-                <div class="accordion-body">
-                    <p class="mb-2">Windows/Linux, Python/Spyder, éditeur de code, Excel, GitHub, GitHub Desktop.</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
-                    <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
-                </div>
-            </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAC0312">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAC0312"
+                aria-expanded="false" aria-controls="collapseAC0312">
+          AC0312 — Lire, exécuter, corriger et modifier un programme
+        </button>
+      </h2>
+      <div id="collapseAC0312" class="accordion-collapse collapse"
+           aria-labelledby="headingAC0312" data-bs-parent="#accordionAC105">
+        <div class="accordion-body">
+          <p class="mb-2">Scripts Python de traitement de données.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
+          <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
         </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingAC0312">
-                <button class="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseAC0312"
-                        aria-expanded="false"
-                        aria-controls="collapseAC0312">
-                    AC0312 — Lire, exécuter, corriger et modifier un programme
-                </button>
-            </h2>
-            <div id="collapseAC0312" class="accordion-collapse collapse"
-                 aria-labelledby="headingAC0312" data-bs-parent="#accordionAC105">
-                <div class="accordion-body">
-                    <p class="mb-2">Scripts Python de traitement de données.</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
-                    <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingAC0313">
-                <button class="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseAC0313"
-                        aria-expanded="false"
-                        aria-controls="collapseAC0313">
-                    AC0313 — Traduire un algorithme en programme pour un environnement donné
-                </button>
-            </h2>
-            <div id="collapseAC0313" class="accordion-collapse collapse"
-                 aria-labelledby="headingAC0313" data-bs-parent="#accordionAC105">
-                <div class="accordion-body">
-                    <p class="mb-2">Conception d’algorithmes de parsing et de filtrage des trames tcpdump.</p>
-                    <a href="https://docs.google.com/document/d/1FeN2BElD6l-e9hMbTnyACJVhwDgJ68lHqt41gvvC-Rw/edit?usp=sharing"
-                       class="btn btn-outline-primary btn-sm me-2"
-                       target="_blank"
-                       rel="noopener noreferrer">Preuve</a>
-                    <a href="https://docs.google.com/document/d/1lFY447uG6UuD09RBO5-ORwZC6omVMhWRTjV8bLsszcU/edit?usp=sharing"
-                       class="btn btn-outline-secondary btn-sm"
-                       target="_blank"
-                       rel="noopener noreferrer">Analyse réflexive</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingAC0314">
-                <button class="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseAC0314"
-                        aria-expanded="false"
-                        aria-controls="collapseAC0314">
-                    AC0314 — Connaître l’architecture et les technologies d’un site Web
-                </button>
-            </h2>
-            <div id="collapseAC0314" class="accordion-collapse collapse"
-                 aria-labelledby="headingAC0314" data-bs-parent="#accordionAC105">
-                <div class="accordion-body">
-                    <p class="mb-2">Génération d’une page de résultats au format Markdown / HTML simple.</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
-                    <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingAC0315">
-                <button class="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseAC0315"
-                        aria-expanded="false"
-                        aria-controls="collapseAC0315">
-                    AC0315 — Choisir les mécanismes de gestion de données adaptés
-                </button>
-            </h2>
-            <div id="collapseAC0315" class="accordion-collapse collapse"
-                 aria-labelledby="headingAC0315" data-bs-parent="#accordionAC105">
-                <div class="accordion-body">
-                    <p class="mb-2">CSV, filtres, agrégations, graphiques dans Excel.</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
-                    <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingAC0316">
-                <button class="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseAC0316"
-                        aria-expanded="false"
-                        aria-controls="collapseAC0316">
-                    AC0316 — S’intégrer dans un environnement collaboratif
-                </button>
-            </h2>
-            <div id="collapseAC0316" class="accordion-collapse collapse"
-                 aria-labelledby="headingAC0316" data-bs-parent="#accordionAC105">
-                <div class="accordion-body">
-                    <p class="mb-2">Hébergement du code sur GitHub et partage avec l’équipe France/Inde.</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
-                    <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
 
-    <h3 class="mt-4">📌 Cahier des charges</h3>
-    <ul>
-        <li>Avoir réalisé le TP1 Python et toutes les activités du dossier Excel fournis par l’enseignant.</li>
-        <li>Réaliser un traitement complet d’un fichier textuel (export tcpdump) pour mettre en évidence les problèmes réseau.</li>
-        <li>Créer un ou deux programmes Python automatisant le traitement :
-            <ul>
-                <li>Extraction des informations utiles et génération d’une page Web (Markdown) présentant les résultats.</li>
-                <li>Génération d’un fichier csv exploitable par un tableur.</li>
-            </ul>
-        </li>
-        <li>Exploiter le fichier csv dans Excel pour produire des tableaux et graphiques pertinents.</li>
-        <li>Rédiger une notice d’utilisation en anglais expliquant :
-            <ul>
-                <li>Comment utiliser le ou les scripts Python.</li>
-                <li>Comment utiliser le fichier Excel pour trouver le problème sur un nouveau fichier.</li>
-            </ul>
-        </li>
-        <li>Publier le projet sur GitHub pour permettre à l’équipe en Inde d’utiliser l’outil en suivant la notice.</li>
-    </ul>
-
-    <h3 class="mt-4">🗂️ Critères d’évaluation (RT3)</h3>
-
-    <strong>AC0311 – Utiliser un système informatique et ses outils (/4)</strong>
-    <ul>
-        <li><strong>Les logiciels :</strong> Capacité à utiliser en autonomie l’ensemble des logiciels mis à disposition (Windows/Linux, terminal, gcc, éditeur, Python/Spyder, Excel, GitHub / GitHub Desktop, etc.).</li>
-    </ul>
-
-    <strong>AC0312 – Lire, exécuter, corriger et modifier un programme (/4)</strong>
-    <ul>
-        <li><strong>Lire et exécuter un programme :</strong> Capacité à lire, commenter, expliquer et exécuter un script Python de traitement de données, avec un niveau d’autonomie croissant (1/4 à 4/4).</li>
-    </ul>
-
-    <strong>AC0313 – Traduire un algorithme dans un langage donné (/4)</strong>
-    <ul>
-        <li><strong>Algorithmes :</strong> Capacité à transformer un algorithme de traitement (filtrage, comptage, agrégation des trames tcpdump) en programme Python fonctionnel et réutilisable.</li>
-    </ul>
-
-    <strong>AC0314 – Connaître l’architecture et les technologies d’un site Web (/4)</strong>
-    <ul>
-        <li><strong>Notions de base HTML / Markdown :</strong> Capacité à générer une page de résultats en Markdown/HTML présentant les statistiques et graphiques issus des traitements Python.</li>
-    </ul>
-
-    <strong>AC0315 – Choisir les mécanismes de gestion de données adaptés (/4)</strong>
-    <ul>
-        <li><strong>Traiter les données :</strong> Capacité à isoler, organiser et représenter les informations pertinentes (tableaux, graphiques Excel) pour expliquer les anomalies détectées.</li>
-    </ul>
-
-    <strong>AC0316 – S’intégrer dans un environnement collaboratif (/4)</strong>
-    <ul>
-        <li><strong>GitHub et ses outils :</strong> Utilisation de Git / GitHub pour versionner le code, collaborer, et mettre à disposition le projet aux équipes France et Inde.</li>
-    </ul>
-
-    <h3 class="mt-4">📝 Modalités d’évaluation</h3>
-    <ul>
-        <li>Présentation orale de 12 minutes avec démonstration commentée du traitement de données réalisé en Python et sous Excel.</li>
-        <li>Démonstration de la capacité à traiter en direct un nouveau fichier fourni le jour de l’oral.</li>
-        <li>Remise sur Moodle d’une notice d’utilisation en anglais pour le programme Python et le fichier Excel.</li>
-    </ul>
-
-    <div class="text-center mt-5">
-        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour au Portfolio</a>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAC0313">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAC0313"
+                aria-expanded="false" aria-controls="collapseAC0313">
+          AC0313 — Traduire un algorithme en programme pour un environnement donné
+        </button>
+      </h2>
+      <div id="collapseAC0313" class="accordion-collapse collapse"
+           aria-labelledby="headingAC0313" data-bs-parent="#accordionAC105">
+        <div class="accordion-body">
+          <p class="mb-2">Conception d'algorithmes de parsing et de filtrage des trames tcpdump.</p>
+          <a href="https://docs.google.com/document/d/1FeN2BElD6l-e9hMbTnyACJVhwDgJ68lHqt41gvvC-Rw/edit?usp=sharing"
+             class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
+          <a href="https://docs.google.com/document/d/1lFY447uG6UuD09RBO5-ORwZC6omVMhWRTjV8bLsszcU/edit?usp=sharing"
+             class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
+        </div>
+      </div>
     </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAC0314">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAC0314"
+                aria-expanded="false" aria-controls="collapseAC0314">
+          AC0314 — Connaître l'architecture et les technologies d'un site Web
+        </button>
+      </h2>
+      <div id="collapseAC0314" class="accordion-collapse collapse"
+           aria-labelledby="headingAC0314" data-bs-parent="#accordionAC105">
+        <div class="accordion-body">
+          <p class="mb-2">Génération d'une page de résultats au format Markdown / HTML simple.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
+          <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAC0315">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAC0315"
+                aria-expanded="false" aria-controls="collapseAC0315">
+          AC0315 — Choisir les mécanismes de gestion de données adaptés
+        </button>
+      </h2>
+      <div id="collapseAC0315" class="accordion-collapse collapse"
+           aria-labelledby="headingAC0315" data-bs-parent="#accordionAC105">
+        <div class="accordion-body">
+          <p class="mb-2">CSV, filtres, agrégations, graphiques dans Excel.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
+          <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAC0316">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseAC0316"
+                aria-expanded="false" aria-controls="collapseAC0316">
+          AC0316 — S'intégrer dans un environnement collaboratif
+        </button>
+      </h2>
+      <div id="collapseAC0316" class="accordion-collapse collapse"
+           aria-labelledby="headingAC0316" data-bs-parent="#accordionAC105">
+        <div class="accordion-body">
+          <p class="mb-2">Hébergement du code sur GitHub et partage avec l'équipe France/Inde.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm me-2" target="_blank" rel="noopener noreferrer">Preuve</a>
+          <a href="#" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">Analyse réflexive</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CAHIER DES CHARGES -->
+  <div class="section-label" data-aos="fade-up">📌 Cahier des charges</div>
+  <ul class="styled-list" data-aos="fade-up" data-aos-delay="60">
+    <li>Avoir réalisé le TP1 Python et toutes les activités du dossier Excel fournis par l'enseignant.</li>
+    <li>Réaliser un traitement complet d'un fichier textuel (export tcpdump) pour mettre en évidence les problèmes réseau.</li>
+    <li>Créer un ou deux programmes Python automatisant le traitement :
+      <ul>
+        <li>Extraction des informations utiles et génération d'une page Web (Markdown) présentant les résultats.</li>
+        <li>Génération d'un fichier csv exploitable par un tableur.</li>
+      </ul>
+    </li>
+    <li>Exploiter le fichier csv dans Excel pour produire des tableaux et graphiques pertinents.</li>
+    <li>Rédiger une notice d'utilisation en anglais expliquant :
+      <ul>
+        <li>Comment utiliser le ou les scripts Python.</li>
+        <li>Comment utiliser le fichier Excel pour trouver le problème sur un nouveau fichier.</li>
+      </ul>
+    </li>
+    <li>Publier le projet sur GitHub pour permettre à l'équipe en Inde d'utiliser l'outil en suivant la notice.</li>
+  </ul>
+
+  <!-- CRITÈRES D'ÉVALUATION -->
+  <div class="section-label" data-aos="fade-up">🗂️ Critères d'évaluation (RT3)</div>
+  <div class="criteres-grid" data-aos="fade-up" data-aos-delay="60">
+
+    <div class="critere-card">
+      <div class="critere-header">
+        <h6>AC0311 — Utiliser un système informatique et ses outils</h6>
+        <span class="critere-score">/4</span>
+      </div>
+      <div class="critere-body">
+        <strong>Les logiciels :</strong> Capacité à utiliser en autonomie l'ensemble des logiciels mis à disposition (Windows/Linux, terminal, gcc, éditeur, Python/Spyder, Excel, GitHub / GitHub Desktop, etc.).
+      </div>
+    </div>
+
+    <div class="critere-card">
+      <div class="critere-header">
+        <h6>AC0312 — Lire, exécuter, corriger et modifier un programme</h6>
+        <span class="critere-score">/4</span>
+      </div>
+      <div class="critere-body">
+        <strong>Lire et exécuter un programme :</strong> Capacité à lire, commenter, expliquer et exécuter un script Python de traitement de données, avec un niveau d'autonomie croissant (1/4 à 4/4).
+      </div>
+    </div>
+
+    <div class="critere-card">
+      <div class="critere-header">
+        <h6>AC0313 — Traduire un algorithme dans un langage donné</h6>
+        <span class="critere-score">/4</span>
+      </div>
+      <div class="critere-body">
+        <strong>Algorithmes :</strong> Capacité à transformer un algorithme de traitement (filtrage, comptage, agrégation des trames tcpdump) en programme Python fonctionnel et réutilisable.
+      </div>
+    </div>
+
+    <div class="critere-card">
+      <div class="critere-header">
+        <h6>AC0314 — Connaître l'architecture et les technologies d'un site Web</h6>
+        <span class="critere-score">/4</span>
+      </div>
+      <div class="critere-body">
+        <strong>Notions de base HTML / Markdown :</strong> Capacité à générer une page de résultats en Markdown/HTML présentant les statistiques et graphiques issus des traitements Python.
+      </div>
+    </div>
+
+    <div class="critere-card">
+      <div class="critere-header">
+        <h6>AC0315 — Choisir les mécanismes de gestion de données adaptés</h6>
+        <span class="critere-score">/4</span>
+      </div>
+      <div class="critere-body">
+        <strong>Traiter les données :</strong> Capacité à isoler, organiser et représenter les informations pertinentes (tableaux, graphiques Excel) pour expliquer les anomalies détectées.
+      </div>
+    </div>
+
+    <div class="critere-card">
+      <div class="critere-header">
+        <h6>AC0316 — S'intégrer dans un environnement collaboratif</h6>
+        <span class="critere-score">/4</span>
+      </div>
+      <div class="critere-body">
+        <strong>GitHub et ses outils :</strong> Utilisation de Git / GitHub pour versionner le code, collaborer, et mettre à disposition le projet aux équipes France et Inde.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODALITÉS D'ÉVALUATION -->
+  <div class="section-label" data-aos="fade-up">📝 Modalités d'évaluation</div>
+  <ol class="modalites-list" data-aos="fade-up" data-aos-delay="60">
+    <li>Présentation orale de 12 minutes avec démonstration commentée du traitement de données réalisé en Python et sous Excel.</li>
+    <li>Démonstration de la capacité à traiter en direct un nouveau fichier fourni le jour de l'oral.</li>
+    <li>Remise sur Moodle d'une notice d'utilisation en anglais pour le programme Python et le fichier Excel.</li>
+  </ol>
+
+  <!-- BOUTON RETOUR -->
+  <div class="text-center mt-5" data-aos="fade-up">
+    <a href="{{ path('app_home') }}" class="btn-retour">
+      ← Retour au Portfolio
+    </a>
+  </div>
+
 </div>
+
 {% endblock %}

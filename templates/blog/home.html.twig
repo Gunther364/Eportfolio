@@ -2,17 +2,21 @@
 {% block body %}
 
 <style>
-  html {
-    scroll-behavior: smooth;
+  /* ── VARIABLES LOCALES ── */
+  :root {
+    --card-radius: 16px;
+    --section-gap: 100px;
   }
 
+  /* ── HERO ── */
   .hero {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    margin-top: 80px;
-    row-gap: 2rem;
+    margin-top: 60px;
+    row-gap: 2.5rem;
+    padding: 60px 0 40px;
   }
 
   .hero img {
@@ -21,43 +25,69 @@
   }
 
   .hero .profile-pic {
-    width: 250px;
-    height: 250px;
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
     object-fit: cover;
+    border: 3px solid rgba(99,102,241,0.4);
+    box-shadow: 0 0 0 8px rgba(99,102,241,0.08), 0 20px 60px rgba(0,0,0,0.4);
+    transition: var(--transition);
   }
+
+  .hero .profile-pic:hover {
+    border-color: rgba(99,102,241,0.8);
+    box-shadow: 0 0 0 12px rgba(99,102,241,0.12), 0 0 40px rgba(99,102,241,0.3);
+    transform: scale(1.03);
+  }
+
+  .hero h1 {
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -1px;
+  }
+
+  .hero h1 strong {
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .lead { color: var(--text-sec); font-size: 1.05rem; }
+  .hero .mb-3 { color: var(--text-sec); font-size: 0.95rem; }
 
   .social-buttons a {
-    margin: 5px;
+    margin: 4px;
+    border-radius: 10px !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--transition) !important;
   }
 
+  .social-buttons a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  /* ── SECTION COMMUNE ── */
   .section-spacing {
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin-top: var(--section-gap);
+    margin-bottom: var(--section-gap);
   }
 
   @media (max-width: 768px) {
-    .section-spacing {
-      margin-top: 60px;
-      margin-bottom: 60px;
-    }
-
-    .hero {
-      margin-top: 40px;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .hero .text-start {
-      text-align: center !important;
-    }
+    .section-spacing { margin-top: 60px; margin-bottom: 60px; }
+    .hero { margin-top: 20px; justify-content: center; text-align: center; }
+    .hero .text-start { text-align: center !important; }
+    .social-buttons { justify-content: center; display: flex; flex-wrap: wrap; }
   }
 
   .section-title {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-bottom: 40px;
     position: relative;
   }
@@ -66,51 +96,151 @@
   .section-title::after {
     content: "";
     display: inline-block;
-    width: 60px;
+    width: 50px;
     height: 2px;
-    background-color: #007bff;
-    margin: 0 15px;
+    background: linear-gradient(90deg, #6366f1, #06b6d4);
+    margin: 0 14px;
     vertical-align: middle;
+    border-radius: 2px;
   }
 
+  /* ── CARTES GLOBALES ── */
   .card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: var(--bg-card) !important;
+    border-color: var(--border-col) !important;
+    border-radius: var(--card-radius) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
   }
 
   .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transform: translateY(-6px) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;
+    border-color: var(--border-hover) !important;
   }
+
+  .card-title { font-weight: 700; color: var(--text-pri) !important; }
+  .card-text { color: var(--text-sec) !important; font-size: 0.88rem; }
 
   .card-img-top {
     height: 200px;
     object-fit: cover;
+    filter: brightness(0.85) saturate(0.9);
+    transition: filter 0.4s ease, transform 0.4s ease;
   }
 
-  .card-body-min {
-    min-height: 160px;
+  .card:hover .card-img-top {
+    filter: brightness(1) saturate(1.05);
+    transform: scale(1.04);
   }
 
+  .card-body-min { min-height: 160px; }
+
+  /* ── BADGE ── */
   .badge {
-    padding: 0.65em 1em;
-    font-size: 0.95rem;
+    padding: 0.6em 1em;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px !important;
+    letter-spacing: 0.3px;
   }
 
-  #competences .list-group-item {
+  /* ── ACCORDION ── */
+  .accordion-item {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-col) !important;
+    border-radius: var(--card-radius) !important;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .accordion-item:hover { border-color: var(--border-hover) !important; }
+
+  .accordion-button {
+    background: var(--bg-card) !important;
+    color: var(--text-pri) !important;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background: rgba(99,102,241,0.08) !important;
+    color: #6366f1 !important;
+  }
+
+  .accordion-button::after {
+    filter: invert(40%) sepia(100%) saturate(500%) hue-rotate(210deg);
+  }
+
+  .accordion-body { background: var(--bg-card) !important; }
+
+  .list-group-item {
+    background: transparent !important;
+    border-color: var(--border-col) !important;
+    color: var(--text-sec) !important;
+    font-size: 0.88rem;
     gap: 12px;
   }
 
-  #competences .list-group-item span {
-    flex: 1 1 300px;
+  .list-group-item span { flex: 1 1 300px; }
+  .btn-group { flex-shrink: 0; }
+
+  /* ── SOFT SKILLS (boutons) ── */
+  .btn-outline-primary, .btn-outline-success,
+  .btn-outline-info, .btn-outline-warning, .btn-outline-danger {
+    border-radius: 10px !important;
+    font-weight: 600;
+    font-size: 0.83rem;
+    transition: var(--transition) !important;
   }
 
-  #competences .btn-group {
-    flex-shrink: 0;
+  .btn-outline-primary:hover, .btn-outline-success:hover,
+  .btn-outline-info:hover, .btn-outline-warning:hover,
+  .btn-outline-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
   }
+
+  /* ── SECTION À PROPOS ── */
+  #apropos .col-md-8 p {
+    color: var(--text-sec);
+    font-size: 0.97rem;
+    margin-bottom: 1.2rem;
+    padding: 18px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-col);
+    border-left: 3px solid #6366f1;
+    border-radius: 10px;
+    transition: border-color 0.3s;
+  }
+
+  #apropos .col-md-8 p:hover { border-left-color: #06b6d4; }
+
+  /* ── SECTION COMPÉTENCES TITRE ── */
+  #competences h3 {
+    font-weight: 700;
+    color: var(--text-pri);
+  }
+
+  #competences > .container > .text-center > p {
+    color: var(--text-sec);
+  }
+
+  #competences .text-center.mt-5 > p {
+    color: var(--text-sec);
+    font-size: 0.93rem;
+  }
+
+  /* ── OVERFLOW image card (pour l'effet zoom) ── */
+  .card { overflow: hidden; }
+
+  /* ── CONTACT ── */
+  #contacts .card-text { font-size: 0.9rem !important; word-break: break-all; }
 </style>
 
 <div class="container text-center" id="acceuil">
-  <div class="hero">
+  <div class="hero" data-aos="fade-up">
     <div class="text-start">
       <h1 class="display-4">Bonjour, je suis <strong>Gauthier</strong></h1>
       <p class="lead">
@@ -156,21 +286,21 @@
 </div>
 
 <section class="py-5 section-spacing" id="apropos">
-  <div class="container">
+  <div class="container" data-aos="fade-up">
     <h2 class="section-title text-center">👤 À propos de moi</h2>
     <div class="row justify-content-center">
       <div class="col-md-8 text-start">
         <p>
-          Je suis étudiant en BUT Réseaux &amp; Télécommunications, intéressé par l’administration des réseaux,
-          la cybersécurité et la création d’outils pour faciliter le travail des équipes techniques.
+          Je suis étudiant en BUT Réseaux &amp; Télécommunications, intéressé par l'administration des réseaux,
+          la cybersécurité et la création d'outils pour faciliter le travail des équipes techniques.
         </p>
         <p>
-          J’aime comprendre en profondeur le fonctionnement des systèmes, automatiser les tâches répétitives
+          J'aime comprendre en profondeur le fonctionnement des systèmes, automatiser les tâches répétitives
           avec des scripts et travailler en équipe sur des projets concrets.
         </p>
         <p>
           Mon objectif à court terme est de développer mes compétences en Python, Linux et sécurité réseau,
-          tout en gagnant de l’expérience professionnelle en entreprise.
+          tout en gagnant de l'expérience professionnelle en entreprise.
         </p>
       </div>
     </div>
@@ -179,15 +309,16 @@
 
 <section class="py-5 section-spacing" id="competences">
   <div class="container">
-    <div class="text-center mb-4">
+    <div class="text-center mb-4" data-aos="fade-up">
       <h2 class="section-title">⚙️ Mes compétences</h2>
       <p class="mb-0">
-        Compétences issues du BUT Réseaux &amp; Télécoms et technologies que j’utilise le plus souvent.
+        Compétences issues du BUT Réseaux &amp; Télécoms et technologies que j'utilise le plus souvent.
       </p>
     </div>
 
-    <div class="accordion" id="accordionCompetences">
+    <div class="accordion" id="accordionCompetences" data-aos="fade-up" data-aos-delay="100">
 
+      <!-- ══ CONNECTER ══ -->
       <div class="accordion-item mb-3">
         <h2 class="accordion-header" id="headingConnecter">
           <button class="accordion-button collapsed" type="button"
@@ -204,28 +335,55 @@
              data-bs-parent="#accordionCompetences">
           <div class="accordion-body">
             <ul class="list-group">
+
               <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                <span>
-                  AC12.05 Communiquer avec un tiers (client, collaborateur...) et adapter son discours et sa langue à son interlocuteur
-                </span>
+                <span>AC12.01 Maîtriser les lois fondamentales de l'électricité afin d'intervenir sur des équipements de réseaux et télécommunications</span>
                 <div class="btn-group btn-group-sm" role="group">
-                  <a href="https://docs.google.com/document/d/133EkEJPjBfuCyYd187wi6oA-Ao5q3XpWqdML227X-ag/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-primary">
-                    Preuve
-                  </a>
-                  <a href="https://docs.google.com/document/d/107xXkJoqq0NDpImRjDqgiCNmbeaTXDFDFlM5nhnIjAs/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-secondary">
-                    Analyse réflexive
-                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
                 </div>
               </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC12.02 Comprendre les dysfonctionnements et réaliser des interventions correctives sur des équipements de réseaux et de télécommunications</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC12.03 Configurer et déployer des équipements de connexion locale et d'accès à Internet</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC12.04 Déployer des supports de transmission</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC12.05 Communiquer avec un tiers (client, collaborateur...) et adapter son discours et sa langue à son interlocuteur</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="https://docs.google.com/document/d/133EkEJPjBfuCyYd187wi6oA-Ao5q3XpWqdML227X-ag/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="https://docs.google.com/document/d/107xXkJoqq0NDpImRjDqgiCNmbeaTXDFDFlM5nhnIjAs/edit?usp=drive_link"
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
             </ul>
           </div>
         </div>
       </div>
 
+      <!-- ══ PROGRAMMER ══ -->
       <div class="accordion-item mb-3">
         <h2 class="accordion-header" id="headingProgrammer">
           <button class="accordion-button collapsed" type="button"
@@ -242,26 +400,63 @@
              data-bs-parent="#accordionCompetences">
           <div class="accordion-body">
             <ul class="list-group">
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC13.01 Utiliser un système informatique et ses outils</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC13.02 Lire, exécuter, corriger et modifier un programme</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
               <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                 <span>AC13.03 Traduire un algorithme dans un langage donné</span>
                 <div class="btn-group btn-group-sm" role="group">
                   <a href="https://docs.google.com/document/d/1FeN2BElD6l-e9hMbTnyACJVhwDgJ68lHqt41gvvC-Rw/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-primary">
-                    Preuve
-                  </a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
                   <a href="https://docs.google.com/document/d/1lFY447uG6UuD09RBO5-ORwZC6omVMhWRTjV8bLsszcU/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-secondary">
-                    Analyse réflexive
-                  </a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
                 </div>
               </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC13.04 Connaître l'architecture et les technologies d'un site Web</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC13.05 Choisir les mécanismes de gestion de données adaptés au développement de l'outil</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC13.06 S'intégrer dans un environnement propice au développement et à l'hébergement en ligne</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
             </ul>
           </div>
         </div>
       </div>
 
+      <!-- ══ ADMINISTRER ══ -->
       <div class="accordion-item mb-3">
         <h2 class="accordion-header" id="headingAdministrer">
           <button class="accordion-button collapsed" type="button"
@@ -280,38 +475,40 @@
             <ul class="list-group">
 
               <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                <span>AC11.02 Architecture des systèmes numériques et de l’Internet</span>
+                <span>AC11.01 Maîtriser les fondamentaux des systèmes numériques et de l'Internet</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
+                </div>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <span>AC11.02 Architecture des systèmes numériques et de l'Internet</span>
                 <div class="btn-group btn-group-sm" role="group">
                   <a href="https://docs.google.com/document/d/1wXjI6q3cqHQDmgPGv2GJjdozFONqxG90UjL53sCYKLs/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-primary">Preuve</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
                   <a href="https://docs.google.com/document/d/14Mp2-5FA2Uf6xeZ98GNz1zKyj9rIHPHg8UrdqSrDbF4/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
                 </div>
               </li>
 
               <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                <span>AC11.03 Configuration d’un réseau local</span>
+                <span>AC11.03 Configuration d'un réseau local</span>
                 <div class="btn-group btn-group-sm" role="group">
                   <a href="https://docs.google.com/document/d/16NoduA2GVES91RqPsuvvB868T71cPSfxgG4YcjvVx9Y/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-primary">Preuve</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
                   <a href="https://docs.google.com/document/d/1WEXR_mAQT8pZSGank4BDnNEvglO6tehNMEE74gkFY8w/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
                 </div>
               </li>
 
               <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                <span>AC11.04 Rôles des systèmes d’exploitation</span>
+                <span>AC11.04 Rôles des systèmes d'exploitation</span>
                 <div class="btn-group btn-group-sm" role="group">
                   <a href="https://docs.google.com/document/d/1fFx4cjpAH4_AlGtLXbMG4oNVDkdaNlBKpjpyyBRE9AQ/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-primary">Preuve</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
                   <a href="https://docs.google.com/document/d/14pFbQSKMRnzyU7vw_BFyKxjiUD61lagOAx5Y3JDyIug/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
                 </div>
               </li>
 
@@ -319,23 +516,19 @@
                 <span>AC11.05 Diagnostic des dysfonctionnements réseau</span>
                 <div class="btn-group btn-group-sm" role="group">
                   <a href="https://docs.google.com/document/d/1JRkBRJuX4UT11hKlmLN3UutXY7gyW4e2ev8hvAej1tg/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-primary">Preuve</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
                   <a href="https://docs.google.com/document/d/1qScX605tSkNkh7Strf_A9P3ZR_rUVDkCvN4UL10tBic/edit?usp=drive_link"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
                 </div>
               </li>
 
               <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                <span>AC11.06 Installation et documentation d’un poste client</span>
+                <span>AC11.06 Installation et documentation d'un poste client</span>
                 <div class="btn-group btn-group-sm" role="group">
                   <a href="https://docs.google.com/document/d/1EpR9-y0W5LzSEfeC4HgME-oklA--bElr/edit?usp=drive_link&ouid=104932122257706886425&rtpof=true&sd=true"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-primary">Preuve</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">Preuve</a>
                   <a href="https://docs.google.com/document/d/1T0AFmloBMjPigKerGOyHhE0QK446I7TW/edit?usp=drive_link&ouid=104932122257706886425&rtpof=true&sd=true"
-                     target="_blank" rel="noopener noreferrer"
-                     class="btn btn-outline-secondary">Analyse réflexive</a>
+                     target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">Analyse réflexive</a>
                 </div>
               </li>
 
@@ -346,7 +539,7 @@
 
     </div>
 
-    <div class="text-center mt-5">
+    <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="100">
       <h3 class="mb-3">🧪 Compétences techniques</h3>
       <p class="mb-4">
         Technologies et outils manipulés dans les SAÉ (réseaux, développement et traitement de données).
@@ -391,7 +584,7 @@
 </section>
 
 <section class="py-5 text-center section-spacing" id="loisirs">
-  <div class="container">
+  <div class="container" data-aos="fade-up">
     <h2 class="section-title">🎉 Loisirs</h2>
     <div class="row">
       <div class="col-md-3">
@@ -416,7 +609,7 @@
           <div class="card-body card-body-min">
             <h5 class="card-title">🎵 Musique</h5>
             <p class="card-text">
-              J’écoute beaucoup de musique et je mixe sur un contrôleur DJ.
+              J'écoute beaucoup de musique et je mixe sur un contrôleur DJ.
             </p>
           </div>
         </div>
@@ -425,12 +618,12 @@
       <div class="col-md-3">
         <div class="card border-info shadow-sm">
           <a href="https://www.chess.com" target="_blank" rel="noopener noreferrer" aria-label="Site Chess.com">
-            <img src="{{ asset('images/echec.jpg') }}" class="card-img-top" alt="Plateau d’échecs">
+            <img src="{{ asset('images/echec.jpg') }}" class="card-img-top" alt="Plateau d'échecs">
           </a>
           <div class="card-body card-body-min">
             <h5 class="card-title">♟️ Échecs</h5>
             <p class="card-text">
-              J’adore jouer aux échecs et en apprendre le plus possible.
+              J'adore jouer aux échecs et en apprendre le plus possible.
             </p>
           </div>
         </div>
@@ -454,7 +647,7 @@
 </section>
 
 <section class="section-spacing" id="projets">
-  <div class="container text-center">
+  <div class="container text-center" data-aos="fade-up">
     <h2 class="section-title">🛠️ Mes projets</h2>
 
     <div class="row justify-content-center">
@@ -579,7 +772,7 @@
           <div class="card-body card-body-min">
             <h5 class="card-title">🎓 SAE 2.04</h5>
             <p class="card-text">
-              Déploiement d’applications et gestion de projet technique.
+              Déploiement d'applications et gestion de projet technique.
             </p>
             <a href="{{ path('app_sae204') }}" class="btn btn-dark" target="_blank">
               Voir le projet
@@ -609,7 +802,7 @@
 </section>
 
 <section class="py-5 section-spacing" id="contacts">
-  <div class="container">
+  <div class="container" data-aos="fade-up">
     <h2 class="text-center mb-4 section-title">📞 Contact</h2>
     <div class="row justify-content-center">
       <div class="col-md-4 mb-4">
@@ -634,7 +827,5 @@
     </div>
   </div>
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% endblock %}
